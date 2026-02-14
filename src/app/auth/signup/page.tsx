@@ -29,7 +29,7 @@ export default function SignupPage() {
     setLoading(true);
     try {
       await signUpWithEmail(email, password, name);
-      toast.success('Account created! Welcome to Clurbhouse.');
+      toast.success('Account created. You\'re in.');
       router.push('/discover');
     } catch (err: unknown) {
       const message =
@@ -63,7 +63,7 @@ export default function SignupPage() {
             Join Clurbhouse
           </h1>
           <p className="text-gray-600">
-            Create a free account and start discovering clubs.
+            Takes 30 seconds. Then go find a club.
           </p>
         </div>
 
@@ -150,7 +150,7 @@ export default function SignupPage() {
               disabled={loading}
               className="w-full py-3 bg-brand-600 text-white font-semibold rounded-lg hover:bg-brand-700 transition-colors disabled:opacity-50"
             >
-              {loading ? 'Creating account...' : 'Sign Up Free'}
+              {loading ? 'Creating account...' : 'Sign Up'}
             </button>
           </form>
 

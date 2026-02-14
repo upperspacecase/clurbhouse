@@ -7,6 +7,7 @@ export interface IClub extends Document {
   shortPitch: string;
   category: string;
   tags: string[];
+  plan: 'starter' | 'growth' | 'pro';
   location: {
     city: string;
     state: string;
@@ -61,6 +62,11 @@ const ClubSchema = new Schema<IClub>(
       ],
     },
     tags: [{ type: String, trim: true, lowercase: true }],
+    plan: {
+      type: String,
+      enum: ['starter', 'growth', 'pro'],
+      default: 'starter',
+    },
     location: {
       city: { type: String, required: true },
       state: { type: String, required: true },

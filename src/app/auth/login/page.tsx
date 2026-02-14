@@ -142,7 +142,7 @@ export default function LoginPage() {
             href="/auth/signup"
             className="text-brand-600 font-medium hover:text-brand-700"
           >
-            Sign up free
+            Sign up
           </Link>
         </p>
       </div>

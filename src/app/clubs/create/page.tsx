@@ -21,6 +21,27 @@ const CATEGORIES = [
   'Other',
 ];
 
+const PLANS = [
+  {
+    id: 'starter',
+    name: 'Starter',
+    price: '$0/mo',
+    desc: 'Get listed, up to 50 members, 1 admin seat.',
+  },
+  {
+    id: 'growth',
+    name: 'Growth',
+    price: '$29/mo',
+    desc: 'Unlimited members, featured search, analytics, 3 admin seats.',
+  },
+  {
+    id: 'pro',
+    name: 'Pro',
+    price: '$79/mo',
+    desc: 'Verified badge, top placement, unlimited admins, custom branding.',
+  },
+];
+
 export default function CreateClubPage() {
   const router = useRouter();
   const { user, getIdToken } = useAuth();
@@ -31,6 +52,7 @@ export default function CreateClubPage() {
     description: '',
     category: '',
     tags: '',
+    plan: 'starter',
     city: '',
     state: '',
     meetingSchedule: '',
@@ -52,7 +74,7 @@ export default function CreateClubPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!user) {
-      toast.error('Please sign in first');
+      toast.error('You need to sign in first');
       router.push('/auth/login');
       return;
     }
@@ -71,6 +93,7 @@ export default function CreateClubPage() {
           shortPitch: form.shortPitch,
           description: form.description,
           category: form.category,
+          plan: form.plan,
           tags: form.tags
             .split(',')
             .map((t) => t.trim())
@@ -93,11 +116,11 @@ export default function CreateClubPage() {
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
-      toast.success('Club created!');
+      toast.success('Club created');
       router.push(`/clubs/${data.club.slug}`);
     } catch (err: unknown) {
       toast.error(
-        err instanceof Error ? err.message : 'Failed to create club'
+        err instanceof Error ? err.message : 'Something went wrong'
       );
     } finally {
       setSubmitting(false);
@@ -108,16 +131,16 @@ export default function CreateClubPage() {
     return (
       <div className="max-w-2xl mx-auto px-4 py-20 text-center">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">
-          Sign in to create a club
+          Sign in to list your club
         </h1>
         <p className="text-gray-600 mb-6">
-          You need an account to list your club on Clurbhouse.
+          You need an account to get your club on Clurbhouse.
         </p>
         <a
           href="/auth/signup"
           className="inline-flex items-center px-6 py-3 bg-brand-600 text-white font-semibold rounded-xl hover:bg-brand-700 transition-colors"
         >
-          Sign Up Free
+          Get Started
         </a>
       </div>
     );
@@ -127,18 +150,58 @@ export default function CreateClubPage() {
     <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Create Your Club
+          List Your Club
         </h1>
         <p className="text-gray-600">
-          List your club on Clurbhouse for free. Fill in the details below and
-          start growing your community.
+          Fill in the details below. Takes about 2 minutes.
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Plan selection */}
+        <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          <h2 className="font-semibold text-gray-900">Pick a plan</h2>
+          <div className="space-y-3">
+            {PLANS.map((plan) => (
+              <label
+                key={plan.id}
+                className={`flex items-start gap-3 p-4 rounded-lg border cursor-pointer transition-colors ${
+                  form.plan === plan.id
+                    ? 'border-brand-500 bg-brand-50'
+                    : 'border-gray-200 hover:border-gray-300'
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="plan"
+                  value={plan.id}
+                  checked={form.plan === plan.id}
+                  onChange={handleChange}
+                  className="mt-1 accent-brand-600"
+                />
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-semibold text-gray-900">
+                      {plan.name}
+                    </span>
+                    <span className="text-sm text-gray-500">{plan.price}</span>
+                  </div>
+                  <p className="text-sm text-gray-600 mt-0.5">{plan.desc}</p>
+                </div>
+              </label>
+            ))}
+          </div>
+          {form.plan !== 'starter' && (
+            <p className="text-xs text-gray-500">
+              Paid plans will be billed after setup. You can start on Starter
+              and upgrade later.
+            </p>
+          )}
+        </div>
+
         {/* Basic info */}
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-          <h2 className="font-semibold text-gray-900">Basic Information</h2>
+          <h2 className="font-semibold text-gray-900">The basics</h2>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -158,7 +221,7 @@ export default function CreateClubPage() {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Short Pitch * <span className="text-gray-400">(max 200 chars)</span>
+              One-liner * <span className="text-gray-400">(max 200 chars)</span>
             </label>
             <input
               type="text"
@@ -167,7 +230,7 @@ export default function CreateClubPage() {
               maxLength={200}
               value={form.shortPitch}
               onChange={handleChange}
-              placeholder="One-liner that hooks people in..."
+              placeholder="What your club is about in one sentence"
               className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
             />
           </div>
@@ -183,7 +246,7 @@ export default function CreateClubPage() {
               rows={5}
               value={form.description}
               onChange={handleChange}
-              placeholder="Tell people what your club is all about, what you do, and why they should join..."
+              placeholder="What do you do? Who should join? What can people expect?"
               className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none resize-none"
             />
           </div>
@@ -225,7 +288,7 @@ export default function CreateClubPage() {
 
         {/* Location */}
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-          <h2 className="font-semibold text-gray-900">Location</h2>
+          <h2 className="font-semibold text-gray-900">Where are you based?</h2>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -260,7 +323,7 @@ export default function CreateClubPage() {
 
         {/* Details */}
         <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
-          <h2 className="font-semibold text-gray-900">Details</h2>
+          <h2 className="font-semibold text-gray-900">Extra details</h2>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -356,7 +419,7 @@ export default function CreateClubPage() {
           disabled={submitting}
           className="w-full py-4 bg-brand-600 text-white font-bold rounded-xl hover:bg-brand-700 transition-colors text-lg disabled:opacity-50"
         >
-          {submitting ? 'Creating...' : 'Create Club — Free Forever'}
+          {submitting ? 'Creating...' : 'Create Club'}
         </button>
       </form>
     </div>

@@ -30,6 +30,7 @@ interface Club {
   location: { city: string; state: string };
   memberCount: number;
   tags: string[];
+  plan: string;
   isVerified: boolean;
 }
 
@@ -74,7 +75,7 @@ function DiscoverContent() {
           Discover Clubs
         </h1>
         <p className="text-gray-600">
-          Browse clubs in your area. Find your people.
+          See what&apos;s happening near you.
         </p>
       </div>
 

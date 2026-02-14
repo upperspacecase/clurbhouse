@@ -15,6 +15,7 @@ interface Club {
   location: { city: string; state: string };
   memberCount: number;
   tags: string[];
+  plan: string;
   isVerified: boolean;
 }
 
@@ -150,8 +151,8 @@ export default function DashboardPage() {
           </h3>
           <p className="text-gray-600 mb-6">
             {tab === 'joined'
-              ? 'Explore clubs near you and join with one click.'
-              : 'List your club for free and start growing your community.'}
+              ? 'Have a look around and see what catches your eye.'
+              : 'Get your club listed and let people find you.'}
           </p>
           <Link
             href={tab === 'joined' ? '/discover' : '/clubs/create'}

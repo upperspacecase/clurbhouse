@@ -81,7 +81,7 @@ export default function ClubDetailPage() {
       if (!res.ok) throw new Error(data.error);
       setIsMember(true);
       setClub((prev) => prev ? { ...prev, memberCount: prev.memberCount + 1 } : prev);
-      toast.success('Welcome to the club!');
+      toast.success('You\'re in');
     } catch (err: unknown) {
       toast.error(err instanceof Error ? err.message : 'Failed to join');
     } finally {
@@ -228,7 +228,7 @@ export default function ClubDetailPage() {
                 disabled={joining}
                 className="w-full py-3 px-4 bg-brand-600 text-white font-semibold rounded-xl hover:bg-brand-700 transition-colors disabled:opacity-50"
               >
-                {joining ? 'Joining...' : 'Join Club — Free'}
+                {joining ? 'Joining...' : 'Join Club'}
               </button>
             )}
 

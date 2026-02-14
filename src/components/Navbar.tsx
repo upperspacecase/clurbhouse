@@ -90,7 +90,7 @@ export default function Navbar() {
                   href="/auth/signup"
                   className="text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 px-4 py-2 rounded-lg transition-colors"
                 >
-                  Sign Up Free
+                  Get Started
                 </Link>
               </div>
             )}
@@ -180,7 +180,7 @@ export default function Navbar() {
                   className="block px-3 py-2 rounded-md text-sm font-medium text-white bg-brand-600 text-center hover:bg-brand-700"
                   onClick={() => setMobileOpen(false)}
                 >
-                  Sign Up Free
+                  Get Started
                 </Link>
               </>
             )}

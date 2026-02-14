@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
 
   const [clubs, total] = await Promise.all([
     Club.find(filter)
-      .sort({ isFeatured: -1, memberCount: -1, createdAt: -1 })
+      .sort({ plan: -1, isFeatured: -1, memberCount: -1, createdAt: -1 })
       .skip(skip)
       .limit(limit)
       .lean(),
@@ -59,6 +59,7 @@ export async function POST(req: NextRequest) {
     shortPitch,
     description,
     category,
+    plan,
     tags,
     location,
     meetingSchedule,
@@ -90,6 +91,7 @@ export async function POST(req: NextRequest) {
     description,
     category,
     tags: tags || [],
+    plan: ['starter', 'growth', 'pro'].includes(plan) ? plan : 'starter',
     location,
     createdBy: authUser.uid,
     admins: [authUser.uid],
