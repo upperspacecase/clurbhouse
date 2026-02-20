@@ -47,7 +47,7 @@ export default function SignupPage() {
   const handleGoogleSignup = async () => {
     try {
       await signInWithGoogle();
-      toast.success('Welcome to Clurbhouse!');
+      toast.success('Welcome to House of Clubs!');
       router.push('/discover');
     } catch (err: unknown) {
       if (err instanceof Error && err.message.includes('popup-closed')) return;
@@ -60,7 +60,7 @@ export default function SignupPage() {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Join Clurbhouse
+            Join House of Clubs
           </h1>
           <p className="text-gray-600">
             Takes 30 seconds. Then go find a club.

@@ -21,7 +21,7 @@ const plans = [
     period: '',
     desc: 'Get listed. See if it works.',
     features: [
-      'Club listing on Clurbhouse',
+      'Club listing on House of Clubs',
       'Up to 50 members',
       'Basic club profile',
       'One admin seat',
@@ -77,14 +77,14 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
-              The clubs day that
+              A farmer&apos;s market
               <br />
-              <span className="text-accent-300">never ends.</span>
+              <span className="text-accent-300">for clubs.</span>
             </h1>
             <p className="text-lg md:text-xl text-brand-100 mb-8 max-w-2xl">
-              You know that one day at uni where every club sets up a table and
-              you walk around deciding what to join? We put that online.
-              Browse clubs in your area, pick what looks good, join on the spot.
+              Every club in your city, in one place. Browse what&apos;s around,
+              join on the spot, manage your memberships.
+              The digital layer that supports the physical one.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
@@ -292,7 +292,7 @@ export default function HomePage() {
               or say &quot;yeah maybe&quot; and never think about it again.
             </p>
             <p>
-              On Clurbhouse, every person browsing is <em>already looking</em> for
+              On House of Clubs, every person browsing is <em>already looking</em> for
               a club to join. They came here for that. You&apos;re not convincing
               anyone of anything — you&apos;re just being in the right place.
             </p>
@@ -344,9 +344,9 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">C</span>
+                <span className="text-white font-bold text-sm">H</span>
               </div>
-              <span className="text-white font-bold text-lg">Clurbhouse</span>
+              <span className="text-white font-bold text-lg">House of Clubs</span>
             </div>
             <div className="flex gap-6 text-sm">
               <Link href="/discover" className="hover:text-white transition-colors">
@@ -360,7 +360,7 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="text-sm">
-              &copy; {new Date().getFullYear()} Clurbhouse. All rights reserved.
+              &copy; {new Date().getFullYear()} House of Clubs. All rights reserved.
             </div>
           </div>
         </div>

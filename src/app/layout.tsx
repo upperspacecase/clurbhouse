@@ -5,9 +5,9 @@ import Navbar from '@/components/Navbar';
 import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
-  title: 'Clurbhouse — Discover & Join Clubs Near You',
+  title: 'House of Clubs — Discover & Join Clubs in Your City',
   description:
-    'Find every club in your area. Sports, arts, tech, social — one-click join, zero cost. Like clubs day, but every day.',
+    'Your local club marketplace. Sports, arts, tech, social — browse, join, and manage memberships. Like a farmer\'s market for clubs.',
 };
 
 export default function RootLayout({

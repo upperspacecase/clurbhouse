@@ -15,10 +15,10 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-2">
               <div className="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">C</span>
+                <span className="text-white font-bold text-sm">H</span>
               </div>
               <span className="text-xl font-bold text-gray-900">
-                Clurbhouse
+                House of Clubs
               </span>
             </Link>
             <div className="hidden md:flex ml-10 gap-1">

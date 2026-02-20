@@ -134,7 +134,7 @@ export default function CreateClubPage() {
           Sign in to list your club
         </h1>
         <p className="text-gray-600 mb-6">
-          You need an account to get your club on Clurbhouse.
+          You need an account to get your club on House of Clubs.
         </p>
         <a
           href="/auth/signup"
